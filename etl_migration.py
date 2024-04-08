@@ -2,10 +2,10 @@ import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.engine import URL
 
-SERVER = 'DGR\ADMIN'
-DATABASE = 'AdventureWorks2019'
-USERNAME = 'etl'
-PASSWORD = 'admin'
+SERVER = ''
+DATABASE = ''
+USERNAME = ''
+PASSWORD = ''
 
 
 def extactsqlserv():
@@ -27,7 +27,7 @@ def extactsqlserv():
 
 def load(df, table):
     try:
-        engine =f'postgresql://postgres:admin@localhost:5432/AdventureWorks'
+        engine =f'postgresql://{USERNAME}:{PASSWORD}@localhost:5432/AdventureWorks'
         df.to_sql(f'stg_{table}', engine, if_exists='replace', index=False, chunksize=100000)
     except Exception as e:
         print("Data load error: " + str(e))
